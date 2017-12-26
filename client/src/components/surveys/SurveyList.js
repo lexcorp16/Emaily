@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import { fetchSurveys } from '../../actions/index';
 
 class SurveyList extends Component {
   componentDidMount() {
+    this.props.fetchSurveys();
+  }
+
+  async deleteSurvey(id) {
+    const res = await axios({
+        method: 'delete',
+        url: '/api/surveys/delete',
+        data: {
+          id,
+        }
+      });
+
     this.props.fetchSurveys();
   }
 
@@ -24,6 +37,7 @@ class SurveyList extends Component {
           <div className="card-action">
             <a href="#">Yes: {survey.yes}</a>
             <a href="#">No: {survey.no}</a>
+            <a className="right" onClick={() => this.deleteSurvey(survey._id)}>Delete Survey</a>
           </div>
         </div>
       );
@@ -31,6 +45,10 @@ class SurveyList extends Component {
   }
 
   render() {
+    if(this.props.surveys.length === 0) {
+      return <div style={{textAlign: 'center'}}>No Surveys</div>
+    }
+
     return(
       <div>
         {this.renderSurveys()}

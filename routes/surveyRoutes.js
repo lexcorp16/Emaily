@@ -12,6 +12,11 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 const Survey = mongoose.model('surveys');
 
 module.exports = (app) => {
+  app.delete('/api/surveys/delete', async (req, res) => {
+    await Survey.remove({_id: req.body.id});
+    res.json({message: 'Todo Deleted!'});
+  });
+
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thanks for voting!');
   });

@@ -24,7 +24,7 @@
     "express": "^4.16.2",
     "localtunnel": "^1.8.3",
     "lodash": "^4.17.4",
-    "mongoose": "^4.13.4",
+    "mongoose": "^5.7.5",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "path-parser": "^3.0.1",
